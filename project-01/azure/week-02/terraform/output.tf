@@ -68,6 +68,3 @@ output "created_resources" {
   }
 }
 
-output "ssh_command" {
-  value = "ssh -i ${local_sensitive_file.vm_key.filename} azureuser@${"73.108.178.44"}"
-}

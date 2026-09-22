@@ -42,3 +42,10 @@ variable "publicIP" {
   sensitive = true 
   
 }
+
+variable "ssh_location" {
+  description = "My ssh key location"
+  type = string 
+  sensitive = true 
+  
+}
