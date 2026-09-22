@@ -33,8 +33,9 @@ resource "azurerm_linux_virtual_machine" "ubuntuVM" {
   }
 }
 
+#Creates key and moves it folder called .ssh
 resource "local_sensitive_file" "vm_key" {
   content         = tls_private_key.linux_key.private_key_openssh
   filename        = "${path.module}/.ssh/vm-linux-01"
-  file_permission = "0600" # no-op on Windows — see below
 }
+#You will need to grant read only permissions to yourself to use ssh key

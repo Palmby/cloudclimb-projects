@@ -35,3 +35,10 @@ variable "adminpassword" {
   type        = string
   sensitive   = true
 }
+
+variable "publicIP" {
+  description = "My Public IP"
+  type = string 
+  sensitive = true 
+  
+}

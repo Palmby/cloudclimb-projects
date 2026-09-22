@@ -11,7 +11,7 @@ resource "azurerm_network_security_group" "nsg-mainvnet" {
     protocol = "Tcp"
     source_port_range = "*"
     destination_port_ranges = ["22"]
-    source_address_prefix = "<mypublicip>/32"
+    source_address_prefix = var.publicIP
     destination_address_prefix = "10.0.1.20"
   }
 
@@ -48,6 +48,14 @@ resource "azurerm_virtual_network" "Main_VNET" {
   }
 }
 
+resource "azurerm_public_ip" "linuxPublicIP"{
+  name = "linuxboxPubIP"
+  resource_group_name = data.azurerm_resource_group.cloud_project_resource_group.name
+  location = "eastus"
+  allocation_method = "Static"
+  sku = "Standard"
+}
+
 resource "azurerm_network_interface" "ubuntuVMNIC" {
   name                = "ubuntuNIC"
   location            = "eastus"
@@ -58,5 +66,6 @@ resource "azurerm_network_interface" "ubuntuVMNIC" {
     subnet_id                     = one([for s in azurerm_virtual_network.Main_VNET.subnet : s.id if s.name == "Application"])
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.1.20"
+    public_ip_address_id = azurerm_public_ip.linuxPublicIP.id
   }
 }
