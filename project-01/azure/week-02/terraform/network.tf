@@ -11,7 +11,7 @@ resource "azurerm_network_security_group" "nsg-mainvnet" {
     protocol = "Tcp"
     source_port_range = "*"
     destination_port_ranges = ["22"]
-    source_address_prefix = "73.108.178.44/32"
+    source_address_prefix = "<mypublicip>/32"
     destination_address_prefix = "10.0.1.20"
   }
 
